@@ -18,6 +18,10 @@ export function inspectSource(file, source, projectRoot = root) {
   const name = relative(projectRoot, file).replaceAll('\\', '/');
   const pure = name.startsWith('src/game/');
   const tree = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true);
+  if (pure && file.endsWith('.tsx')) violations.push(`${name}: JSX does not belong in the pure game layer`);
+  if (pure && (tree.typeReferenceDirectives.length || tree.libReferenceDirectives.length || tree.referencedFiles.length)) {
+    violations.push(`${name}: ambient reference directives can bypass the pure type boundary`);
+  }
   function checkModule(specifier) {
     if (!ts.isStringLiteralLike(specifier)) {
       violations.push(`${name}: computed module references are not auditable`);

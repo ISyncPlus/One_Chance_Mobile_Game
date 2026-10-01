@@ -6,6 +6,8 @@ Status: architecture approved; Phase 1 implementation.
 
 Use stable Expo SDK 57 and its supported React / React Native / native module versions. Verify with the installed `expo/bundledNativeModules.json`, `expo install --check`, Expo Doctor, dependency peer validation, and actual native builds. Commit the lockfile. Do not resolve incompatibilities using `--force`, `--legacy-peer-deps`, error suppression, or unrelated package upgrades.
 
+The one targeted upstream path-quoting correction is documented in [ADR 0002](0002-expo-constants-path-quoting.md). It is a reproducible fix, not an error suppression.
+
 Use Hermes and the React Native New Architecture provided by the SDK. Expo CNG owns generated iOS/Android projects. Build locally; EAS, a backend, cloud services, and runtime downloads are not requirements. Expo Router routes are composition only.
 
 React DOM is pinned to the SDK's React version because Router's dependency graph includes web peer requirements, even though this product targets native platforms only. This does not add web as a supported target. Worklets is required by Reanimated. Safe Area Context, Screens, Linking, Constants, Font, Status Bar, and System UI support the native Router/runtime integration. The development client is for native verification. No sound playback dependency is installed yet.

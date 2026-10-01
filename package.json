@@ -17,7 +17,8 @@
     "check": "npm run typecheck && npm run lint && npm run check:architecture && npm test",
     "doctor": "expo-doctor",
     "check:dependencies": "expo install --check",
-    "check:architecture": "node scripts/architecture.mjs"
+    "check:architecture": "node scripts/architecture.mjs",
+    "postinstall": "patch-package --error-on-fail"
   },
   "dependencies": {
     "@shopify/react-native-skia": "2.6.2",
@@ -46,6 +47,7 @@
     "eslint": "9.39.5",
     "eslint-config-expo": "~57.0.2",
     "expo-doctor": "1.20.4",
+    "patch-package": "8.0.1",
     "typescript": "~6.0.3"
   },
   "type": "module",

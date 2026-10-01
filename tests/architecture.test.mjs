@@ -29,6 +29,11 @@ test('pure layer permits local domain imports', () => {
   assert.deepEqual(inspectSource(engineFile, 'import type { RuleSource } from "../content/provenance";', root), []);
 });
 
+test('pure layer rejects JSX and ambient platform references', () => {
+  assert.ok(inspectSource(engineFile.replace('.ts', '.tsx'), 'const x = <View />;', root).length > 0);
+  assert.ok(inspectSource(engineFile, '/// <reference types="react-native" />', root).length > 0);
+});
+
 test('production modules cannot import diagnostic geometry', () => {
   assert.ok(inspectSource(resolve(root, 'src/rendering/board/scene.ts'), 'import "../../diagnostics/geometry";', root).length > 0);
 });
