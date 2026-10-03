@@ -32,7 +32,8 @@ Release builds show a neutral foundation screen. No match creation or gameplay i
 - [Module boundaries](docs/architecture/boundaries.md)
 - [Unconfirmed physical rules](docs/rules/unknowns.md)
 - [Phase 1 verification](docs/phase-1-verification.md)
+- [Phase 1B stabilization and acceptance](docs/phase-1b-verification.md)
 
-`npm run check` runs strict app and pure-game type checks, ESLint, an AST-based import audit, and Node's built-in test runner. Tests run without React Native or a simulator. No additional test framework is needed for the current pure math and architecture tests; native UI/persistence integration tooling will be added when those tests exist.
+`npm run check` runs strict app and pure-game type checks, ESLint, an AST-based import audit, and Node's built-in test runner. Tests run without React Native or a simulator. Native diagnostic acceptance uses the isolated [host tooling](scripts/acceptance/README.md); match persistence integration tests remain outside the current implementation.
 
 The app's local bundle/package ID is `com.onechance.mobile`. Confirm the publisher-owned namespace before signing or store distribution. This is not a claim of namespace ownership.

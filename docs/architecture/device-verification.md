@@ -4,7 +4,11 @@
 
 Use a native development client with the locked dependency set. iOS requires Xcode and a simulator or signed device. Android requires Java, SDK/build tools, and an emulator or device. Configure ANDROID_HOME/ANDROID_SDK_ROOT to the actual SDK containing the chosen AVD's system image. Record any external setup blocker precisely.
 
+The [Phase 1B report](../phase-1b-verification.md) records native lifecycle source evidence, repeated launch/reload results and environment failures. Reusable host-only native acceptance procedures are in [scripts/acceptance](../../scripts/acceptance/README.md). Keep failed trials separate from successful retries.
+
 Run `npm run check`, `npm run check:dependencies`, and `npm run doctor`. Start Metro with `npm start -- --localhost`; build and launch with the native scripts. Inspect Metro, native logs, and on-screen error overlays.
+
+During a server restart, terminate the client first, start one Metro process, wait for its ready status, then launch the client again. Ordinary Metro reloads avoid external deep-link reentry during asynchronous ReactHost teardown. This is a tested development procedure, not a fix for the historical launcher exception. Save native crash/ANR and Metro logs before resetting a failed session. On this host, Node needed `NODE_OPTIONS=--dns-result-order=ipv4first` for URLs using 127.0.0.1; a Java IPv4 build-process retry resolved Maven `No route to host` failures. Neither setting changes application networking.
 
 ## Rendering lab checklist
 
