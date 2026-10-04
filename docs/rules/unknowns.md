@@ -19,6 +19,6 @@ Unknown and unconfigured:
 - Loans, debt, bankruptcy, rounding, insufficient funds, and bank supply.
 - Victory, valuation, ties, elimination, match end, conflict precedence.
 
-There is no production ruleset in Phase 1. `RuleKnowledge<T>` explicitly represents unknown values as null and requires evidence for confirmed values. Nothing in diagnostic geometry, screen labels, or tooling establishes a physical game rule.
+Phase 2 supplies a production-purpose `one-chance` / `draft-1` ruleset draft, not a playable ruleset. Its seven confirmed facts reference the owner brief; all 22 configuration entries remain unknown. `RuleKnowledge<T>` explicitly represents unknown values as null and requires evidence for confirmed values. Nothing in diagnostic geometry, screen labels, or tooling establishes a physical game rule.
 
 The approved UI capacity of 2–6 players is a layout requirement, not evidence of legal physical player limits.

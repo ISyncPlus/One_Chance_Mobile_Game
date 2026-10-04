@@ -1,6 +1,6 @@
 # One Chance Mobile
 
-Production mobile foundation for an offline-first, landscape, pass-and-play board game. **Phase 1 only: no gameplay is implemented.**
+Production mobile foundation for an offline-first, landscape, pass-and-play board game. **Phase 2: a pure deterministic domain foundation exists; no consumer gameplay is implemented.**
 
 ## Development
 
@@ -29,6 +29,8 @@ Release builds show a neutral foundation screen. No match creation or gameplay i
 ## Architecture and current scope
 
 - [Architecture decisions](docs/decisions/0001-foundation.md)
+- [Deterministic domain contracts](docs/decisions/0003-deterministic-domain.md)
+- [Phase 2 verification](docs/phase-2-verification.md)
 - [Module boundaries](docs/architecture/boundaries.md)
 - [Unconfirmed physical rules](docs/rules/unknowns.md)
 - [Phase 1 verification](docs/phase-1-verification.md)

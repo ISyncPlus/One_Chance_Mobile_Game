@@ -10,6 +10,7 @@
     "exactOptionalPropertyTypes": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "allowImportingTsExtensions": true,
     "noEmit": true
   },
   "include": ["src/game/**/*.ts"]

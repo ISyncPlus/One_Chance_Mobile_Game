@@ -1,7 +1,7 @@
 /** Evidence is data; it must never execute code or choose default rules. */
 export interface RuleSource {
   readonly id: string;
-  readonly kind: 'product-brief' | 'rulebook' | 'board' | 'card' | 'owner-clarification';
+  readonly kind: 'product-brief' | 'rulebook' | 'board' | 'card' | 'owner-clarification' | 'test-fixture';
   readonly reference: string;
   readonly edition: string | null;
 }

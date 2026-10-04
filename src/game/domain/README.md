@@ -1,1 +1,1 @@
-Serializable match identities, BoardDefinition, gameplay state, and invariants. No runtime engine is implemented in Phase 1. BoardLayout belongs to rendering. No physical player maximum is defined.
+Version-1 serializable match state, roster, logical position, turn order/ownership, durable Ready handoff, pending decision, deck/completion contracts, receipts, and strict JSON validation. Presentation state stays elsewhere. No physical player maximum is inferred. See [ADR 0003](../../../docs/decisions/0003-deterministic-domain.md).

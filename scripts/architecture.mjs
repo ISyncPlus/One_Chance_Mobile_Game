@@ -42,6 +42,10 @@ export function inspectSource(file, source, projectRoot = root) {
     }
   }
   function visit(node) {
+    if (pure && !name.startsWith('src/game/economy/') && ts.isPropertyAssignment(node) &&
+      (ts.isIdentifier(node.name) || ts.isStringLiteralLike(node.name)) && node.name.text === 'balanceUnits') {
+      violations.push(`${name}: balance construction belongs to the central economy subsystem`);
+    }
     if ((ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) && node.moduleSpecifier) checkModule(node.moduleSpecifier);
     if (ts.isImportTypeNode(node) && ts.isLiteralTypeNode(node.argument)) checkModule(node.argument.literal);
     if (ts.isImportEqualsDeclaration(node) && ts.isExternalModuleReference(node.moduleReference) && node.moduleReference.expression) checkModule(node.moduleReference.expression);
@@ -50,6 +54,17 @@ export function inspectSource(file, source, projectRoot = root) {
     }
     if (pure && ts.isIdentifier(node) && ['require', 'eval', 'Function', 'globalThis'].includes(node.text)) {
       violations.push(`${name}: ${node.text} can bypass the pure module boundary`);
+    }
+    if (pure && ts.isIdentifier(node) && ['Date', 'performance', 'fetch', 'XMLHttpRequest', 'WebSocket',
+      'navigator', 'window', 'document', 'crypto', 'process', 'console', 'setTimeout', 'setInterval',
+      'requestAnimationFrame'].includes(node.text)) {
+      violations.push(`${name}: ${node.text} is ambient platform/time/randomness access`);
+    }
+    // No Math aliases/destructuring/computed lookup: these can hide an ambient random call.
+    if (pure && ts.isIdentifier(node) && node.text === 'Math' &&
+      !(ts.isPropertyAccessExpression(node.parent) && node.parent.expression === node &&
+        ['imul', 'floor', 'ceil', 'round', 'trunc', 'abs', 'min', 'max', 'sign'].includes(node.parent.name.text))) {
+      violations.push(`${name}: Math must use an explicitly deterministic operation`);
     }
     ts.forEachChild(node, visit);
   }

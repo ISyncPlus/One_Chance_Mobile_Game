@@ -1,1 +1,1 @@
-The sole financial transaction and balance-change authority. Future rules request economy transactions; they never write balances directly. No economic rules are currently configured.
+Sole balance authority: integer-unit account initialization and atomic credit/debit/transfer validation. Transactions retain actor, reason/reference and command/event origin. No physical payouts or negative-balance/debt/rounding policy is inferred. See [ADR 0003](../../../docs/decisions/0003-deterministic-domain.md).

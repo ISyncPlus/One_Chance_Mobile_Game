@@ -1,1 +1,1 @@
-Physical rules, evidence/provenance, explicit unknowns, and validation. A RuleKnowledge value cannot be confirmed without a source. No playable ruleset is supplied.
+Evidence-bearing draft/validated ruleset models, explicit unknowns, version pinning and readiness reporting. Production draft contains only owner-confirmed facts; every physical configuration value remains unknown. Artificial test evidence cannot configure a production ruleset. See [ADR 0003](../../../docs/decisions/0003-deterministic-domain.md).

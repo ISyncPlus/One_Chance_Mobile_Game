@@ -1,1 +1,1 @@
-Future seeded gameplay randomness, with versioned algorithms and serializable generator state. No random behavior is implemented in Phase 1. Visual streams must never consume this stream.
+Versioned xoshiro128** gameplay RNG with explicit hex seed, immutable checkpoints, unbiased inclusive integer sampling and copying Fisher–Yates shuffle. C-backed golden tests protect reproduction. No ambient or visual randomness belongs here. See [ADR 0003](../../../docs/decisions/0003-deterministic-domain.md).

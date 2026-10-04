@@ -41,3 +41,25 @@ test('production modules cannot import diagnostic geometry', () => {
 test('presentation cannot bypass application services', () => {
   assert.ok(inspectSource(resolve(root, 'src/ui/Example.ts'), 'import "../game/engine/resolve";', root).length > 0);
 });
+
+test('pure layer rejects ambient time, randomness, platform access and aliases', () => {
+  for (const source of [
+    'Math.random();', 'const random = Math.random;', 'const { random: draw } = Math;',
+    'const math = Math; math.random();', 'Math[method]();', 'Math["random"]();',
+    'Date.now();', 'const Clock = Date;', 'new Date();', 'performance.now();',
+    'crypto.getRandomValues(words);', 'setTimeout(action, 1);', 'fetch("url");',
+    'globalThis["Math"]["random"]();', 'process.env.SEED;',
+  ]) assert.ok(inspectSource(engineFile, source, root).length > 0, source);
+});
+
+test('pure layer permits explicitly deterministic arithmetic', () => {
+  assert.deepEqual(inspectSource(engineFile, 'const result = Math.imul(5, 7); const n = Math.floor(4 / 2);', root), []);
+});
+
+test('balance construction is restricted to the central economy subsystem', () => {
+  for (const source of ['const account = { balanceUnits: 100 };', 'const account = { "balanceUnits": 100 };']) {
+    assert.ok(inspectSource(engineFile, source, root).length > 0);
+    assert.deepEqual(inspectSource(resolve(root, 'src/game/economy/transactions.ts'), source, root), []);
+  }
+  assert.deepEqual(inspectSource(engineFile, 'const balance = account.balanceUnits;', root), []);
+});

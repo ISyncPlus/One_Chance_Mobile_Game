@@ -1,1 +1,1 @@
-Pure command validation, resolution, and event reducers will live here. They may depend only on other game modules. No rule resolution is implemented in Phase 1.
+Pure `resolveCommand` and `applyEvent`, shared typed command validation, revision/identity checks and headless transitions. Current commands cover verified generic setup, handoff, transactions and recording dice outcomes. Replay applies recorded entropy without sampling. No physical rulebook behaviour is implemented. See [ADR 0003](../../../docs/decisions/0003-deterministic-domain.md).
